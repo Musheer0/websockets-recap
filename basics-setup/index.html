@@ -109,7 +109,7 @@
   const input = document.getElementById("msgInput");
   const btn = document.getElementById("sendBtn");
   const status = document.getElementById("status");
-
+ let isConnected = false;
   function addMsg(text, self = false) {
     const div = document.createElement("div");
     div.className = "msg" + (self ? " self" : "");
@@ -122,6 +122,7 @@
     status.textContent = "online";
     status.style.color = "#22c55e";
     addMsg("connected to server ✔");
+    isConnected =true;
   };
 
   ws.onmessage = (e) => {
@@ -132,13 +133,19 @@
     status.textContent = "offline";
     status.style.color = "#ef4444";
     addMsg("connection closed — rip");
+    isConnected =true;
   };
 
   ws.onerror = () => {
     addMsg("socket error — something exploded quietly");
+    isConnected =true;
   };
 
   function send() {
+   if(!isConnected) {
+    alert('your not connected to ws');
+    return;
+   }
     const text = input.value.trim();
     if (!text) return;
 

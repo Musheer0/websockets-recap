@@ -23,13 +23,17 @@ const wss = new WebSocketServer({server});
 const Users = new Set()
 wss.on("connection",(socket,req)=>{
     const ip = req.socket.remoteAddress;
-    console.log(ip, 'started connection connection')
+    console.log(ip, 'started connection ')
     Users.add(ip);
+    console.log('users',Users)
     socket.on("message",(data)=>{
         wss.clients.forEach((c)=>{
             if(c.readyState===WebSocket.OPEN){
                 console.log(ip, 'broadcasted a message')
-                c.send(data.toString())
+                
+               if(c!==socket){
+                 c.send(data.toString())
+               }
             }
         });
     });
