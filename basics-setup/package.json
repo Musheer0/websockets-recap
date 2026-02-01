@@ -1,0 +1,21 @@
+{
+  "name": "basics-setup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"node --watch app.js",
+    "start":"node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.26.2",
+  "dependencies": {
+    "@types/node": "^25.1.0",
+    "@types/ws": "^8.18.1",
+    "ws": "^8.19.0"
+  }
+}
